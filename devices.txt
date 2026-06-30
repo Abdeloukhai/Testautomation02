@@ -1,0 +1,3 @@
+List of devices attached
+RFCN80A7HYJ	device
+

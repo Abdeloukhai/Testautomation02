@@ -1,0 +1,1482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.14.5 on win32)" generated="2026-06-24T10:49:28.922937" rpa="false" schemaversion="5">
+<suite id="s1" name="Multi Call Test" source="C:\Users\saleh\Testautomation\robot\multi_call_test.robot">
+<test id="s1-t1" name="Setup And Verify Environment" line="72">
+<kw name="Verify ADB Is Available">
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:49:29.165686" level="INFO">Starting process:
+adb --version</msg>
+<msg time="2026-06-24T10:49:29.173233" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:49:29.249411" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:49:29.249726" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>--version</arg>
+<arg>stdout=${OUTPUT_DIR}/adb_version.txt</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:49:29.163484" elapsed="0.086337"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:49:29.251600" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:49:29.250196" elapsed="0.001516"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-06-24T10:49:29.252343" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\saleh\Testautomation\robot\adb_version.txt"&gt;C:\Users\saleh\Testautomation\robot\adb_version.txt&lt;/a&gt;'.</msg>
+<msg time="2026-06-24T10:49:29.265544" level="INFO">${output} = Android Debug Bridge version 1.0.41
+Version 37.0.0-14910828
+Installed as C:\Users\saleh\Testautomation\robot\adb.exe
+Running on Windows 10.0.22631
+</msg>
+<var>${output}</var>
+<arg>${OUTPUT_DIR}/adb_version.txt</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-06-24T10:49:29.251995" elapsed="0.013610"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${output}</arg>
+<arg>Android Debug Bridge</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2026-06-24T10:49:29.265785" elapsed="0.000807"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:49:29.158527" elapsed="0.108209"/>
+</kw>
+<kw name="Verify Device Is Connected">
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:49:29.269396" level="INFO">Starting process:
+adb devices</msg>
+<msg time="2026-06-24T10:49:29.274110" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:49:34.438528" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:49:34.438842" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>devices</arg>
+<arg>stdout=${OUTPUT_DIR}/devices.txt</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:49:29.268122" elapsed="5.170797"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:49:34.440682" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:49:34.439284" elapsed="0.001490"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-06-24T10:49:34.441124" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\saleh\Testautomation\robot\devices.txt"&gt;C:\Users\saleh\Testautomation\robot\devices.txt&lt;/a&gt;'.</msg>
+<msg time="2026-06-24T10:49:34.454042" level="INFO">${output} = List of devices attached
+RFCN80A7HYJ	device
+
+</msg>
+<var>${output}</var>
+<arg>${OUTPUT_DIR}/devices.txt</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-06-24T10:49:34.440933" elapsed="0.013180"/>
+</kw>
+<kw name="Should Match Regexp" owner="BuiltIn">
+<arg>${output}</arg>
+<arg>(?m)^\\S+\\s+device$</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="PASS" start="2026-06-24T10:49:34.454327" elapsed="0.000702"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:34.455593" level="INFO">Device connected successfully</msg>
+<arg>Device connected successfully</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:34.455212" elapsed="0.000452"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:49:29.267473" elapsed="5.188287"/>
+</kw>
+<doc>Verify ADB is installed and a device is connected.</doc>
+<status status="PASS" start="2026-06-24T10:49:29.156892" elapsed="5.299245"/>
+</test>
+<test id="s1-t2" name="Make 10 Mobile Calls" line="77">
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2026-06-24T10:49:34.458923" level="INFO">Length is 10.</msg>
+<msg time="2026-06-24T10:49:34.459049" level="INFO">${total} = 10</msg>
+<var>${total}</var>
+<arg>${DESTINATION_NUMBERS}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2026-06-24T10:49:34.458235" elapsed="0.000850"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:34.462554" level="INFO">Starting 10-call sequence</msg>
+<arg>Starting ${total}-call sequence</arg>
+<arg>level=INFO</arg>
+<arg>console=yes</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:34.461015" elapsed="0.002392"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-06-24T10:49:34.465574" level="INFO">${index} = 1</msg>
+<var>${index}</var>
+<arg>${1}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2026-06-24T10:49:34.464220" elapsed="0.001452"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Make Single Call">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:34.469503" level="INFO">
+── Call 1 of 10: +49151000001 ──</msg>
+<arg>\n── Call ${index} of ${total}: ${number} ──</arg>
+<arg>level=INFO</arg>
+<arg>console=yes</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:34.467360" elapsed="0.002874"/>
+</kw>
+<kw name="Dial Phone Number">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:34.472255" level="INFO">Dialing +49151000001 ...</msg>
+<arg>Dialing ${number} ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:34.471686" elapsed="0.000663"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:49:34.473155" level="INFO">Starting process:
+adb shell am start -a android.intent.action.CALL -d tel:+49151000001</msg>
+<msg time="2026-06-24T10:49:34.483833" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:49:34.785391" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:49:34.785599" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>am</arg>
+<arg>start</arg>
+<arg>-a</arg>
+<arg>android.intent.action.CALL</arg>
+<arg>-d</arg>
+<arg>tel:${number}</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:49:34.472501" elapsed="0.313142"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:49:34.787377" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:49:34.785869" elapsed="0.001600"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:34.788265" level="INFO">Dial command executed successfully</msg>
+<arg>Dial command executed successfully</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:34.787705" elapsed="0.000691"/>
+</kw>
+<arg>${number}</arg>
+<status status="PASS" start="2026-06-24T10:49:34.470567" elapsed="0.317931"/>
+</kw>
+<kw name="Wait And End Call">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:49:39.789930" level="INFO">Slept 5 seconds.</msg>
+<arg>${CALL_DURATION}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:49:34.789018" elapsed="5.001064"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:49:39.790910" level="INFO">Starting process:
+adb shell input keyevent 6</msg>
+<msg time="2026-06-24T10:49:39.799286" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:49:40.001041" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:49:40.001251" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>input</arg>
+<arg>keyevent</arg>
+<arg>6</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:49:39.790283" elapsed="0.211019"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:49:40.002548" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:49:40.001538" elapsed="0.001100"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:40.003201" level="INFO">Call ended</msg>
+<arg>Call ended</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:40.002806" elapsed="0.000464"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:49:34.788707" elapsed="5.214656"/>
+</kw>
+<arg>${number}</arg>
+<arg>${index}</arg>
+<arg>${total}</arg>
+<status status="PASS" start="2026-06-24T10:49:34.466855" elapsed="5.536575"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-24T10:49:40.004220" level="INFO">${index} = 2</msg>
+<var>${index}</var>
+<arg>${index} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-24T10:49:40.003590" elapsed="0.000676"/>
+</kw>
+<if>
+<branch type="IF" condition="${index} &lt;= ${total}">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:40.005268" level="INFO">Waiting 3s before next call ...</msg>
+<arg>Waiting ${INTER_CALL_DELAY} before next call ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:40.004761" elapsed="0.000585"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:49:43.006443" level="INFO">Slept 3 seconds.</msg>
+<arg>${INTER_CALL_DELAY}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:49:40.005518" elapsed="3.001091"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:49:40.004424" elapsed="3.002271"/>
+</branch>
+<status status="PASS" start="2026-06-24T10:49:40.004379" elapsed="3.002390"/>
+</if>
+<var name="${number}">+49151000001</var>
+<status status="PASS" start="2026-06-24T10:49:34.466613" elapsed="8.540214"/>
+</iter>
+<iter>
+<kw name="Make Single Call">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:43.011727" level="INFO">
+── Call 2 of 10: +49151000002 ──</msg>
+<arg>\n── Call ${index} of ${total}: ${number} ──</arg>
+<arg>level=INFO</arg>
+<arg>console=yes</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:43.008495" elapsed="0.006732"/>
+</kw>
+<kw name="Dial Phone Number">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:43.016909" level="INFO">Dialing +49151000002 ...</msg>
+<arg>Dialing ${number} ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:43.016310" elapsed="0.000693"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:49:43.018012" level="INFO">Starting process:
+adb shell am start -a android.intent.action.CALL -d tel:+49151000002</msg>
+<msg time="2026-06-24T10:49:43.022840" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:49:43.528209" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:49:43.528420" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>am</arg>
+<arg>start</arg>
+<arg>-a</arg>
+<arg>android.intent.action.CALL</arg>
+<arg>-d</arg>
+<arg>tel:${number}</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:49:43.017189" elapsed="0.511311"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:49:43.530594" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:49:43.528784" elapsed="0.001976"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:43.531894" level="INFO">Dial command executed successfully</msg>
+<arg>Dial command executed successfully</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:43.531094" elapsed="0.000922"/>
+</kw>
+<arg>${number}</arg>
+<status status="PASS" start="2026-06-24T10:49:43.015722" elapsed="0.516461"/>
+</kw>
+<kw name="Wait And End Call">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:49:48.533615" level="INFO">Slept 5 seconds.</msg>
+<arg>${CALL_DURATION}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:49:43.532982" elapsed="5.000771"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:49:48.534591" level="INFO">Starting process:
+adb shell input keyevent 6</msg>
+<msg time="2026-06-24T10:49:48.537871" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:49:48.739712" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:49:48.739912" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>input</arg>
+<arg>keyevent</arg>
+<arg>6</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:49:48.533959" elapsed="0.205993"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:49:48.741048" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:49:48.740159" elapsed="0.000966"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:48.741589" level="INFO">Call ended</msg>
+<arg>Call ended</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:48.741265" elapsed="0.000380"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:49:43.532599" elapsed="5.209143"/>
+</kw>
+<arg>${number}</arg>
+<arg>${index}</arg>
+<arg>${total}</arg>
+<status status="PASS" start="2026-06-24T10:49:43.007764" elapsed="5.734034"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-24T10:49:48.745487" level="INFO">${index} = 3</msg>
+<var>${index}</var>
+<arg>${index} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-24T10:49:48.743573" elapsed="0.002690"/>
+</kw>
+<if>
+<branch type="IF" condition="${index} &lt;= ${total}">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:48.748613" level="INFO">Waiting 3s before next call ...</msg>
+<arg>Waiting ${INTER_CALL_DELAY} before next call ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:48.747756" elapsed="0.001001"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:49:51.749935" level="INFO">Slept 3 seconds.</msg>
+<arg>${INTER_CALL_DELAY}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:49:48.749044" elapsed="3.001024"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:49:48.746980" elapsed="3.003159"/>
+</branch>
+<status status="PASS" start="2026-06-24T10:49:48.746881" elapsed="3.003315"/>
+</if>
+<var name="${number}">+49151000002</var>
+<status status="PASS" start="2026-06-24T10:49:43.007147" elapsed="8.743095"/>
+</iter>
+<iter>
+<kw name="Make Single Call">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:51.751994" level="INFO">
+── Call 3 of 10: +49151000003 ──</msg>
+<arg>\n── Call ${index} of ${total}: ${number} ──</arg>
+<arg>level=INFO</arg>
+<arg>console=yes</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:51.751346" elapsed="0.000904"/>
+</kw>
+<kw name="Dial Phone Number">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:51.754380" level="INFO">Dialing +49151000003 ...</msg>
+<arg>Dialing ${number} ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:51.753533" elapsed="0.000967"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:49:51.755573" level="INFO">Starting process:
+adb shell am start -a android.intent.action.CALL -d tel:+49151000003</msg>
+<msg time="2026-06-24T10:49:51.764091" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:49:51.965826" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:49:51.966278" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>am</arg>
+<arg>start</arg>
+<arg>-a</arg>
+<arg>android.intent.action.CALL</arg>
+<arg>-d</arg>
+<arg>tel:${number}</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:49:51.754786" elapsed="0.211562"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:49:51.968253" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:49:51.966687" elapsed="0.001659"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:51.968913" level="INFO">Dial command executed successfully</msg>
+<arg>Dial command executed successfully</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:51.968522" elapsed="0.000455"/>
+</kw>
+<arg>${number}</arg>
+<status status="PASS" start="2026-06-24T10:49:51.752744" elapsed="0.216321"/>
+</kw>
+<kw name="Wait And End Call">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:49:56.970478" level="INFO">Slept 5 seconds.</msg>
+<arg>${CALL_DURATION}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:49:51.969543" elapsed="5.001076"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:49:56.971453" level="INFO">Starting process:
+adb shell input keyevent 6</msg>
+<msg time="2026-06-24T10:49:56.974394" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:49:57.180051" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:49:57.180292" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>input</arg>
+<arg>keyevent</arg>
+<arg>6</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:49:56.970824" elapsed="0.209516"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:49:57.181436" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:49:57.180522" elapsed="0.000999"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:57.182064" level="INFO">Call ended</msg>
+<arg>Call ended</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:57.181698" elapsed="0.000433"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:49:51.969251" elapsed="5.212967"/>
+</kw>
+<arg>${number}</arg>
+<arg>${index}</arg>
+<arg>${total}</arg>
+<status status="PASS" start="2026-06-24T10:49:51.750708" elapsed="5.431571"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-24T10:49:57.182854" level="INFO">${index} = 4</msg>
+<var>${index}</var>
+<arg>${index} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-24T10:49:57.182416" elapsed="0.000474"/>
+</kw>
+<if>
+<branch type="IF" condition="${index} &lt;= ${total}">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:49:57.183712" level="INFO">Waiting 3s before next call ...</msg>
+<arg>Waiting ${INTER_CALL_DELAY} before next call ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:49:57.183275" elapsed="0.000524"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:50:00.184595" level="INFO">Slept 3 seconds.</msg>
+<arg>${INTER_CALL_DELAY}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:49:57.183947" elapsed="3.000782"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:49:57.182992" elapsed="3.001806"/>
+</branch>
+<status status="PASS" start="2026-06-24T10:49:57.182966" elapsed="3.001885"/>
+</if>
+<var name="${number}">+49151000003</var>
+<status status="PASS" start="2026-06-24T10:49:51.750508" elapsed="8.434383"/>
+</iter>
+<iter>
+<kw name="Make Single Call">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:00.186664" level="INFO">
+── Call 4 of 10: +49151000004 ──</msg>
+<arg>\n── Call ${index} of ${total}: ${number} ──</arg>
+<arg>level=INFO</arg>
+<arg>console=yes</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:00.185835" elapsed="0.001133"/>
+</kw>
+<kw name="Dial Phone Number">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:00.188840" level="INFO">Dialing +49151000004 ...</msg>
+<arg>Dialing ${number} ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:00.188107" elapsed="0.000817"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:50:00.189702" level="INFO">Starting process:
+adb shell am start -a android.intent.action.CALL -d tel:+49151000004</msg>
+<msg time="2026-06-24T10:50:00.199649" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:50:00.401630" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:50:00.401878" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>am</arg>
+<arg>start</arg>
+<arg>-a</arg>
+<arg>android.intent.action.CALL</arg>
+<arg>-d</arg>
+<arg>tel:${number}</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:50:00.189096" elapsed="0.212839"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:50:00.403951" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:50:00.402297" elapsed="0.001812"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:00.405218" level="INFO">Dial command executed successfully</msg>
+<arg>Dial command executed successfully</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:00.404448" elapsed="0.000894"/>
+</kw>
+<arg>${number}</arg>
+<status status="PASS" start="2026-06-24T10:50:00.187410" elapsed="0.218076"/>
+</kw>
+<kw name="Wait And End Call">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:50:05.407428" level="INFO">Slept 5 seconds.</msg>
+<arg>${CALL_DURATION}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:50:00.406289" elapsed="5.002964"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:50:05.411359" level="INFO">Starting process:
+adb shell input keyevent 6</msg>
+<msg time="2026-06-24T10:50:05.415389" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:50:05.617263" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:50:05.617516" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>input</arg>
+<arg>keyevent</arg>
+<arg>6</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:50:05.409635" elapsed="0.208011"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:50:05.619009" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:50:05.617896" elapsed="0.001208"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:05.619655" level="INFO">Call ended</msg>
+<arg>Call ended</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:05.619276" elapsed="0.000440"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:50:00.405783" elapsed="5.214015"/>
+</kw>
+<arg>${number}</arg>
+<arg>${index}</arg>
+<arg>${total}</arg>
+<status status="PASS" start="2026-06-24T10:50:00.185345" elapsed="5.434509"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-24T10:50:05.620423" level="INFO">${index} = 5</msg>
+<var>${index}</var>
+<arg>${index} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-24T10:50:05.619981" elapsed="0.000479"/>
+</kw>
+<if>
+<branch type="IF" condition="${index} &lt;= ${total}">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:05.621143" level="INFO">Waiting 3s before next call ...</msg>
+<arg>Waiting ${INTER_CALL_DELAY} before next call ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:05.620785" elapsed="0.000416"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:50:08.622296" level="INFO">Slept 3 seconds.</msg>
+<arg>${INTER_CALL_DELAY}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:50:05.621340" elapsed="3.001090"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:50:05.620557" elapsed="3.001942"/>
+</branch>
+<status status="PASS" start="2026-06-24T10:50:05.620533" elapsed="3.002015"/>
+</if>
+<var name="${number}">+49151000004</var>
+<status status="PASS" start="2026-06-24T10:50:00.185144" elapsed="8.437446"/>
+</iter>
+<iter>
+<kw name="Make Single Call">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:08.623993" level="INFO">
+── Call 5 of 10: +49151000005 ──</msg>
+<arg>\n── Call ${index} of ${total}: ${number} ──</arg>
+<arg>level=INFO</arg>
+<arg>console=yes</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:08.623504" elapsed="0.005674"/>
+</kw>
+<kw name="Dial Phone Number">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:08.631386" level="INFO">Dialing +49151000005 ...</msg>
+<arg>Dialing ${number} ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:08.630650" elapsed="0.000823"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:50:08.632373" level="INFO">Starting process:
+adb shell am start -a android.intent.action.CALL -d tel:+49151000005</msg>
+<msg time="2026-06-24T10:50:08.636803" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:50:08.838910" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:50:08.839102" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>am</arg>
+<arg>start</arg>
+<arg>-a</arg>
+<arg>android.intent.action.CALL</arg>
+<arg>-d</arg>
+<arg>tel:${number}</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:50:08.631659" elapsed="0.207486"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:50:08.840298" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:50:08.839381" elapsed="0.001001"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:08.843220" level="INFO">Dial command executed successfully</msg>
+<arg>Dial command executed successfully</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:08.840528" elapsed="0.002806"/>
+</kw>
+<arg>${number}</arg>
+<status status="PASS" start="2026-06-24T10:50:08.629683" elapsed="0.213779"/>
+</kw>
+<kw name="Wait And End Call">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:50:13.845997" level="INFO">Slept 5 seconds.</msg>
+<arg>${CALL_DURATION}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:50:08.844539" elapsed="5.001631"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:50:13.847337" level="INFO">Starting process:
+adb shell input keyevent 6</msg>
+<msg time="2026-06-24T10:50:13.850451" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:50:14.052342" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:50:14.052611" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>input</arg>
+<arg>keyevent</arg>
+<arg>6</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:50:13.846543" elapsed="0.206131"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:50:14.054020" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:50:14.052901" elapsed="0.001205"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:14.054665" level="INFO">Call ended</msg>
+<arg>Call ended</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:14.054275" elapsed="0.000455"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:50:08.844057" elapsed="5.210823"/>
+</kw>
+<arg>${number}</arg>
+<arg>${index}</arg>
+<arg>${total}</arg>
+<status status="PASS" start="2026-06-24T10:50:08.623045" elapsed="5.431922"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-24T10:50:14.055623" level="INFO">${index} = 6</msg>
+<var>${index}</var>
+<arg>${index} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-24T10:50:14.055124" elapsed="0.000569"/>
+</kw>
+<if>
+<branch type="IF" condition="${index} &lt;= ${total}">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:14.056715" level="INFO">Waiting 3s before next call ...</msg>
+<arg>Waiting ${INTER_CALL_DELAY} before next call ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:14.056219" elapsed="0.000568"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:50:17.060565" level="INFO">Slept 3 seconds.</msg>
+<arg>${INTER_CALL_DELAY}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:50:14.057066" elapsed="3.003708"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:50:14.055876" elapsed="3.005062"/>
+</branch>
+<status status="PASS" start="2026-06-24T10:50:14.055840" elapsed="3.005219"/>
+</if>
+<var name="${number}">+49151000005</var>
+<status status="PASS" start="2026-06-24T10:50:08.622850" elapsed="8.438314"/>
+</iter>
+<iter>
+<kw name="Make Single Call">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:17.063043" level="INFO">
+── Call 6 of 10: +49151000006 ──</msg>
+<arg>\n── Call ${index} of ${total}: ${number} ──</arg>
+<arg>level=INFO</arg>
+<arg>console=yes</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:17.062456" elapsed="0.000841"/>
+</kw>
+<kw name="Dial Phone Number">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:17.064558" level="INFO">Dialing +49151000006 ...</msg>
+<arg>Dialing ${number} ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:17.064056" elapsed="0.000583"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:50:17.065531" level="INFO">Starting process:
+adb shell am start -a android.intent.action.CALL -d tel:+49151000006</msg>
+<msg time="2026-06-24T10:50:17.071765" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:50:17.276646" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:50:17.277073" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>am</arg>
+<arg>start</arg>
+<arg>-a</arg>
+<arg>android.intent.action.CALL</arg>
+<arg>-d</arg>
+<arg>tel:${number}</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:50:17.064916" elapsed="0.212223"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:50:17.279114" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:50:17.277828" elapsed="0.001381"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:17.279748" level="INFO">Dial command executed successfully</msg>
+<arg>Dial command executed successfully</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:17.279378" elapsed="0.000434"/>
+</kw>
+<arg>${number}</arg>
+<status status="PASS" start="2026-06-24T10:50:17.063625" elapsed="0.216275"/>
+</kw>
+<kw name="Wait And End Call">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:50:22.281336" level="INFO">Slept 5 seconds.</msg>
+<arg>${CALL_DURATION}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:50:17.280365" elapsed="5.001105"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:50:22.282302" level="INFO">Starting process:
+adb shell input keyevent 6</msg>
+<msg time="2026-06-24T10:50:22.285276" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:50:22.487094" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:50:22.487296" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>input</arg>
+<arg>keyevent</arg>
+<arg>6</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:50:22.281674" elapsed="0.205666"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:50:22.488884" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:50:22.487559" elapsed="0.001440"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:22.489684" level="INFO">Call ended</msg>
+<arg>Call ended</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:22.489211" elapsed="0.000553"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:50:17.280087" elapsed="5.209780"/>
+</kw>
+<arg>${number}</arg>
+<arg>${index}</arg>
+<arg>${total}</arg>
+<status status="PASS" start="2026-06-24T10:50:17.061903" elapsed="5.430404"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-24T10:50:22.494058" level="INFO">${index} = 7</msg>
+<var>${index}</var>
+<arg>${index} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-24T10:50:22.492868" elapsed="0.001291"/>
+</kw>
+<if>
+<branch type="IF" condition="${index} &lt;= ${total}">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:22.497104" level="INFO">Waiting 3s before next call ...</msg>
+<arg>Waiting ${INTER_CALL_DELAY} before next call ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:22.495108" elapsed="0.002181"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:50:25.498744" level="INFO">Slept 3 seconds.</msg>
+<arg>${INTER_CALL_DELAY}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:50:22.497655" elapsed="3.001211"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:50:22.494372" elapsed="3.004557"/>
+</branch>
+<status status="PASS" start="2026-06-24T10:50:22.494316" elapsed="3.004657"/>
+</if>
+<var name="${number}">+49151000006</var>
+<status status="PASS" start="2026-06-24T10:50:17.061602" elapsed="8.437414"/>
+</iter>
+<iter>
+<kw name="Make Single Call">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:25.500419" level="INFO">
+── Call 7 of 10: +49151000007 ──</msg>
+<arg>\n── Call ${index} of ${total}: ${number} ──</arg>
+<arg>level=INFO</arg>
+<arg>console=yes</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:25.499878" elapsed="0.000845"/>
+</kw>
+<kw name="Dial Phone Number">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:25.503533" level="INFO">Dialing +49151000007 ...</msg>
+<arg>Dialing ${number} ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:25.502467" elapsed="0.001191"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:50:25.504980" level="INFO">Starting process:
+adb shell am start -a android.intent.action.CALL -d tel:+49151000007</msg>
+<msg time="2026-06-24T10:50:25.513267" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:50:25.715030" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:50:25.715236" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>am</arg>
+<arg>start</arg>
+<arg>-a</arg>
+<arg>android.intent.action.CALL</arg>
+<arg>-d</arg>
+<arg>tel:${number}</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:50:25.504099" elapsed="0.211185"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:50:25.716720" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:50:25.715513" elapsed="0.001313"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:25.717455" level="INFO">Dial command executed successfully</msg>
+<arg>Dial command executed successfully</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:25.717020" elapsed="0.000508"/>
+</kw>
+<arg>${number}</arg>
+<status status="PASS" start="2026-06-24T10:50:25.501248" elapsed="0.216408"/>
+</kw>
+<kw name="Wait And End Call">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:50:30.719335" level="INFO">Slept 5 seconds.</msg>
+<arg>${CALL_DURATION}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:50:25.718466" elapsed="5.001002"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:50:30.720314" level="INFO">Starting process:
+adb shell input keyevent 6</msg>
+<msg time="2026-06-24T10:50:30.724937" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:50:30.927846" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:50:30.928138" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>input</arg>
+<arg>keyevent</arg>
+<arg>6</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:50:30.719690" elapsed="0.208588"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:50:30.930719" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:50:30.928817" elapsed="0.002084"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:30.931699" level="INFO">Call ended</msg>
+<arg>Call ended</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:30.931199" elapsed="0.000578"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:50:25.718066" elapsed="5.213813"/>
+</kw>
+<arg>${number}</arg>
+<arg>${index}</arg>
+<arg>${total}</arg>
+<status status="PASS" start="2026-06-24T10:50:25.499432" elapsed="5.432518"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-24T10:50:30.932659" level="INFO">${index} = 8</msg>
+<var>${index}</var>
+<arg>${index} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-24T10:50:30.932121" elapsed="0.000579"/>
+</kw>
+<if>
+<branch type="IF" condition="${index} &lt;= ${total}">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:30.933552" level="INFO">Waiting 3s before next call ...</msg>
+<arg>Waiting ${INTER_CALL_DELAY} before next call ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:30.933098" elapsed="0.000519"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:50:33.934685" level="INFO">Slept 3 seconds.</msg>
+<arg>${INTER_CALL_DELAY}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:50:30.933764" elapsed="3.001053"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:50:30.932816" elapsed="3.002071"/>
+</branch>
+<status status="PASS" start="2026-06-24T10:50:30.932786" elapsed="3.002153"/>
+</if>
+<var name="${number}">+49151000007</var>
+<status status="PASS" start="2026-06-24T10:50:25.499259" elapsed="8.435719"/>
+</iter>
+<iter>
+<kw name="Make Single Call">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:33.936747" level="INFO">
+── Call 8 of 10: +49151000008 ──</msg>
+<arg>\n── Call ${index} of ${total}: ${number} ──</arg>
+<arg>level=INFO</arg>
+<arg>console=yes</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:33.935975" elapsed="0.001008"/>
+</kw>
+<kw name="Dial Phone Number">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:33.938526" level="INFO">Dialing +49151000008 ...</msg>
+<arg>Dialing ${number} ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:33.937865" elapsed="0.000739"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:50:33.942002" level="INFO">Starting process:
+adb shell am start -a android.intent.action.CALL -d tel:+49151000008</msg>
+<msg time="2026-06-24T10:50:33.949142" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:50:34.150792" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:50:34.150995" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>am</arg>
+<arg>start</arg>
+<arg>-a</arg>
+<arg>android.intent.action.CALL</arg>
+<arg>-d</arg>
+<arg>tel:${number}</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:50:33.938793" elapsed="0.212245"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:50:34.152232" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:50:34.151258" elapsed="0.001051"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:34.152771" level="INFO">Dial command executed successfully</msg>
+<arg>Dial command executed successfully</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:34.152445" elapsed="0.000393"/>
+</kw>
+<arg>${number}</arg>
+<status status="PASS" start="2026-06-24T10:50:33.937305" elapsed="0.215624"/>
+</kw>
+<kw name="Wait And End Call">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:50:39.154041" level="INFO">Slept 5 seconds.</msg>
+<arg>${CALL_DURATION}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:50:34.153337" elapsed="5.000927"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:50:39.156998" level="INFO">Starting process:
+adb shell input keyevent 6</msg>
+<msg time="2026-06-24T10:50:39.163181" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:50:39.364859" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:50:39.365064" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>input</arg>
+<arg>keyevent</arg>
+<arg>6</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:50:39.154629" elapsed="0.210490"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:50:39.366434" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:50:39.365364" elapsed="0.001226"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:39.367597" level="INFO">Call ended</msg>
+<arg>Call ended</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:39.366872" elapsed="0.000943"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:50:34.153092" elapsed="5.214911"/>
+</kw>
+<arg>${number}</arg>
+<arg>${index}</arg>
+<arg>${total}</arg>
+<status status="PASS" start="2026-06-24T10:50:33.935429" elapsed="5.432703"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-24T10:50:39.369192" level="INFO">${index} = 9</msg>
+<var>${index}</var>
+<arg>${index} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-24T10:50:39.368489" elapsed="0.000759"/>
+</kw>
+<if>
+<branch type="IF" condition="${index} &lt;= ${total}">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:39.370222" level="INFO">Waiting 3s before next call ...</msg>
+<arg>Waiting ${INTER_CALL_DELAY} before next call ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:39.369718" elapsed="0.000580"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:50:42.371051" level="INFO">Slept 3 seconds.</msg>
+<arg>${INTER_CALL_DELAY}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:50:39.370465" elapsed="3.000719"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:50:39.369391" elapsed="3.001861"/>
+</branch>
+<status status="PASS" start="2026-06-24T10:50:39.369357" elapsed="3.001944"/>
+</if>
+<var name="${number}">+49151000008</var>
+<status status="PASS" start="2026-06-24T10:50:33.935227" elapsed="8.436111"/>
+</iter>
+<iter>
+<kw name="Make Single Call">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:42.374716" level="INFO">
+── Call 9 of 10: +49151000009 ──</msg>
+<arg>\n── Call ${index} of ${total}: ${number} ──</arg>
+<arg>level=INFO</arg>
+<arg>console=yes</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:42.373873" elapsed="0.001161"/>
+</kw>
+<kw name="Dial Phone Number">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:42.378243" level="INFO">Dialing +49151000009 ...</msg>
+<arg>Dialing ${number} ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:42.377553" elapsed="0.000787"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:50:42.379249" level="INFO">Starting process:
+adb shell am start -a android.intent.action.CALL -d tel:+49151000009</msg>
+<msg time="2026-06-24T10:50:42.384252" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:50:42.585632" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:50:42.585882" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>am</arg>
+<arg>start</arg>
+<arg>-a</arg>
+<arg>android.intent.action.CALL</arg>
+<arg>-d</arg>
+<arg>tel:${number}</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:50:42.378517" elapsed="0.207427"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:50:42.587475" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:50:42.586284" elapsed="0.001292"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:42.588788" level="INFO">Dial command executed successfully</msg>
+<arg>Dial command executed successfully</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:42.587883" elapsed="0.003027"/>
+</kw>
+<arg>${number}</arg>
+<status status="PASS" start="2026-06-24T10:50:42.375786" elapsed="0.215365"/>
+</kw>
+<kw name="Wait And End Call">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:50:47.593907" level="INFO">Slept 5 seconds.</msg>
+<arg>${CALL_DURATION}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:50:42.592542" elapsed="5.001544"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:50:47.595016" level="INFO">Starting process:
+adb shell input keyevent 6</msg>
+<msg time="2026-06-24T10:50:47.598467" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:50:47.799964" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:50:47.800192" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>input</arg>
+<arg>keyevent</arg>
+<arg>6</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:50:47.594309" elapsed="0.205938"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:50:47.801474" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:50:47.800470" elapsed="0.001092"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:47.802098" level="INFO">Call ended</msg>
+<arg>Call ended</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:47.801722" elapsed="0.000440"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:50:42.591562" elapsed="5.210687"/>
+</kw>
+<arg>${number}</arg>
+<arg>${index}</arg>
+<arg>${total}</arg>
+<status status="PASS" start="2026-06-24T10:50:42.371778" elapsed="5.430537"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-24T10:50:47.803108" level="INFO">${index} = 10</msg>
+<var>${index}</var>
+<arg>${index} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-24T10:50:47.802473" elapsed="0.000695"/>
+</kw>
+<if>
+<branch type="IF" condition="${index} &lt;= ${total}">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:47.804182" level="INFO">Waiting 3s before next call ...</msg>
+<arg>Waiting ${INTER_CALL_DELAY} before next call ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:47.803630" elapsed="0.000635"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:50:50.806982" level="INFO">Slept 3 seconds.</msg>
+<arg>${INTER_CALL_DELAY}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:50:47.804451" elapsed="3.002732"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:50:47.803303" elapsed="3.004091"/>
+</branch>
+<status status="PASS" start="2026-06-24T10:50:47.803270" elapsed="3.004876"/>
+</if>
+<var name="${number}">+49151000009</var>
+<status status="PASS" start="2026-06-24T10:50:42.371585" elapsed="8.436672"/>
+</iter>
+<iter>
+<kw name="Make Single Call">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:50.813240" level="INFO">
+── Call 10 of 10: +49151000010 ──</msg>
+<arg>\n── Call ${index} of ${total}: ${number} ──</arg>
+<arg>level=INFO</arg>
+<arg>console=yes</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:50.812076" elapsed="0.001683"/>
+</kw>
+<kw name="Dial Phone Number">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:50.816426" level="INFO">Dialing +49151000010 ...</msg>
+<arg>Dialing ${number} ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:50.815503" elapsed="0.001120"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:50:50.818380" level="INFO">Starting process:
+adb shell am start -a android.intent.action.CALL -d tel:+49151000010</msg>
+<msg time="2026-06-24T10:50:50.825866" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:50:51.130211" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:50:51.130441" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>am</arg>
+<arg>start</arg>
+<arg>-a</arg>
+<arg>android.intent.action.CALL</arg>
+<arg>-d</arg>
+<arg>tel:${number}</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:50:50.816994" elapsed="0.313601"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:50:51.132617" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:50:51.131114" elapsed="0.001614"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:51.133386" level="INFO">Dial command executed successfully</msg>
+<arg>Dial command executed successfully</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:51.132933" elapsed="0.000528"/>
+</kw>
+<arg>${number}</arg>
+<status status="PASS" start="2026-06-24T10:50:50.814311" elapsed="0.319254"/>
+</kw>
+<kw name="Wait And End Call">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-24T10:50:56.134905" level="INFO">Slept 5 seconds.</msg>
+<arg>${CALL_DURATION}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-24T10:50:51.134125" elapsed="5.000966"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-24T10:50:56.136602" level="INFO">Starting process:
+adb shell input keyevent 6</msg>
+<msg time="2026-06-24T10:50:56.142381" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-24T10:50:56.344347" level="INFO">Process completed.</msg>
+<msg time="2026-06-24T10:50:56.344590" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>input</arg>
+<arg>keyevent</arg>
+<arg>6</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-24T10:50:56.135441" elapsed="0.209227"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-24T10:50:56.346156" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-24T10:50:56.344975" elapsed="0.001276"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:56.347040" level="INFO">Call ended</msg>
+<arg>Call ended</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:56.346499" elapsed="0.000613"/>
+</kw>
+<status status="PASS" start="2026-06-24T10:50:51.133789" elapsed="5.213419"/>
+</kw>
+<arg>${number}</arg>
+<arg>${index}</arg>
+<arg>${total}</arg>
+<status status="PASS" start="2026-06-24T10:50:50.810803" elapsed="5.536474"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2026-06-24T10:50:56.348072" level="INFO">${index} = 11</msg>
+<var>${index}</var>
+<arg>${index} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2026-06-24T10:50:56.347449" elapsed="0.000683"/>
+</kw>
+<if>
+<branch type="IF" condition="${index} &lt;= ${total}">
+<kw name="Log" owner="BuiltIn">
+<arg>Waiting ${INTER_CALL_DELAY} before next call ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2026-06-24T10:50:56.348657" elapsed="0.000033"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<arg>${INTER_CALL_DELAY}</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="NOT RUN" start="2026-06-24T10:50:56.348834" elapsed="0.000028"/>
+</kw>
+<status status="NOT RUN" start="2026-06-24T10:50:56.348311" elapsed="0.000600"/>
+</branch>
+<status status="PASS" start="2026-06-24T10:50:56.348274" elapsed="0.000679"/>
+</if>
+<var name="${number}">+49151000010</var>
+<status status="PASS" start="2026-06-24T10:50:50.810404" elapsed="5.538590"/>
+</iter>
+<var>${number}</var>
+<value>@{DESTINATION_NUMBERS}</value>
+<status status="PASS" start="2026-06-24T10:49:34.466056" elapsed="81.882990"/>
+</for>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-24T10:50:56.350095" level="INFO">All 10 calls completed</msg>
+<arg>All ${total} calls completed</arg>
+<arg>level=INFO</arg>
+<arg>console=yes</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-24T10:50:56.349417" elapsed="0.000934"/>
+</kw>
+<doc>Dial each number in DESTINATION_NUMBERS in sequence.
+Waits 5s per call, 3s between calls.</doc>
+<tag>call</tag>
+<tag>mobile</tag>
+<tag>multi</tag>
+<status status="PASS" start="2026-06-24T10:49:34.457233" elapsed="81.893512"/>
+</test>
+<doc>Dials 10 different phone numbers in sequence, waits, then ends each call.
+Requires a connected Android device with USB debugging enabled.
+Set DEST_01 through DEST_10 as environment variables to configure numbers.</doc>
+<status status="PASS" start="2026-06-24T10:49:28.929306" elapsed="87.422461"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">call</stat>
+<stat pass="1" fail="0" skip="0">mobile</stat>
+<stat pass="1" fail="0" skip="0">multi</stat>
+</tag>
+<suite>
+<stat name="Multi Call Test" id="s1" pass="2" fail="0" skip="0">Multi Call Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
