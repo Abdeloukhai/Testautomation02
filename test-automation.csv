@@ -1,0 +1,240 @@
+TMSID;Headline;Description;Pre-Conditions ;Test Steps;ExpectedResults;Comments
+TMSII01276126;Voice call to OnnetNumber charge from Main balance < 60sec;To verify CCS charges  subscriber successfully for voice onnet call  for duration less than 60 sec from main balance.;"1.Matrixx RT-CCS is working fine.
+2.ST/NT integration completed with Matrixx.
+3.Take working subscriber from AldiTalk SP.
+4.Subscription has sufficient balance.
+5.Empirix/Anritsu can be used to get traces.
+6.Onnet Call charge from PayGo offer is 0.03€/Min Beat/Minute for first 60 Sec 
+7. Connection to Kafka";"1.Query wallet from REST interface in RT-CCS and availableAmount from main balance is noted.
+Resource:rsgateway/data/openapi/subscription/<Subscription-ID>/wallet
+*Available Main Balance Ex:10€
+2.Device 1 initiate voice call to onnet number AldiTalk.
+3.Disconnect voice call after 50 Sec.
+4.EDR TefVoiceEvent is generated for voice call and EDR fields are verified in RT-CCS.
+*catalogItemExternalId from appliedCatalogItemArray
+*productOfferExternalId,usageQuantity from appliedOfferArray
+*amount,usageQuantity from chargeList
+*amount,balanceResourceId,grossAmountBefore,and grossAmountAfter from balanceUpdateArray
+*quantityType,quantityUnit,ratingAmount and msgAmount from usageQuantityList
+*sessionId
+*calledStationId
+*callingStationId
+*originationCCName:DEU
+*originationCCRegion:OD
+*destinationTypeId:NC
+*roamingFlagId:false
+*callTypeId:MO
+*iddCCName: DEU
+*iddCCRegion: DD
+5.Query wallet from REST interface in RT-CCS and verify 0.03€ deduction from main balance.";"1.Wallet queried successful and availableAmount is noted from Main balance.
+2.Call is connected successfully.
+3.Call is disconnected and 0.03€ is charged.
+4.EDR fields are verified.
+5.Wallet queried successful and availableAmount from main balance is verified.";Aldi talk subscription needs to be created  , Kafka needs to be connected to verify DER
+TMSII01276150;Data usage charge from main balance;To verify CCS charges SP AldiTalk subscriber for using data from main balance.;"1.Matrixx RT-CCS is working fine.
+2.ST/NT integration completed with Matrixx.
+3.Take working subscriber from AldiTalk SP.
+4.Subscription has sufficient balance.
+5.Empirix/Anritsu can be used to get traces.
+6.Data usage charge 0.24€/MB Beat/10KB";"1.Query wallet from REST interface in RT-CCS and availableAmount from main balance is noted.
+Resource:rsgateway/data/openapi/subscription/<Subscription-ID>/wallet
+*Available Main Balance Ex:10€
+2.Device 1 initiate data session for few Min.
+*Ex:Total USU=10MB
+3.EDR TefDataEvent is generated for data usage and verify below fields from EDR.
+*catalogItemExternalId from appliedCatalogItemArray
+*productOfferExternalId,usageQuantity from appliedOfferArray
+*amount,balanceResourceId,grossAmountBefore and grossAmountAfter from balanceUpdateArray
+*amount,usageQuantity from chargeList
+*quantityType,quantityUnit,ratingAmount and msgAmount from usageQuantityList
+*imsi:Imsi attached for the transaction
+*sessionId
+*originationCCName:DEU
+*originationCCRegion:OD
+*roamingFlagId:false
+4.Query wallet from REST interface in RT-CCS and verify 2.4€ charged from balance.";"1.Wallet queried successful and availableAmount is noted from Main balance.
+2.Data session started successful.
+3.EDR fields are verified.
+4.Wallet queried successful and availableAmount is verified from main balance.";
+TMSII01228917;TEF-165_003 - WhatsApp - External Payment - Purchase;"TEF-165: Subscription Expiry Rules based on Payment Method
+
+The purpose of this test is to verify the correct update of the subscription expiry date by an offer purchased based on the payment method and the offer price.";"1. CCS is fully integrated.
+2. CCS at Release 5251 or higher.
+3. CCS  is up and running.
+4. RS Gateway up and running
+5. RESTful test client (e.g. SoapUI) is available and able to communicate with CCS.
+6. Access to NMC-Tools for checking Events.
+7. Access to Anritsu for fetching pcap traces.
+8. Access to latest version of ""U-640 Converged Charging System (CCS) – Swagger Spec"" and its subpages. Either directly in confluence or as export.
+9. Access to latest version of ""U-640 Converged Charging System (CCS) – Event Interface Specification"".
+10. A working WhatsApp customer account with sufficient balance.";"1. Query the subscription and check the main balance and the TefActiveEndDate.
+   Method:    GET
+   Ressource: /rsgateway/data/openapi/subscription/{SearchTerm}
+   Body:      empty
+2. Send a RESTful API Call with following parameters to purchase a WhatsAll pack with paymentMethod External Payment:
+   Method:    POST
+   Resource: /rsgateway/data/openapi/subscription/{Search Term}/offers
+   Body:
+   {
+     ""mtx_container_name"": ""MtxRequestSubscriberPurchaseOffer"",
+     ""apiEventData"": {
+       ""mtx_container_name"": ""TefApiEventDataExtension"",
+       ""ClientName"": ""PostmanTestClient_{{Tester}}""
+     },
+     ""executeMode"": ""normal"",
+     ""offerRequestArray"": [
+       {
+         ""mtx_container_name"": ""MtxPurchasedOfferData"",
+         ""externalId"": ""vsdU_rlh_4wD0dI28dR_1RC_1D_iT_165"",
+         ""attr"": {
+           ""mtx_container_name"": ""TefPurchasedItemExtension"",
+           ""UnitGrantAmount"": 4000,
+           ""c1ChargeId"": ""RC00001"",
+           ""epcProductId"": ""ABCD123456"",
+           ""epcProductName"": ""WhatsAll UnitsPack"",
+           ""glCode"": ""100000"",
+           ""paymentMethod"": ""External Payment"",
+           ""productTaxCategory"": ""Services_Telco"",
+           ""productTaxCode"": ""A2"",
+           ""purchaseSequence"": ""00001"",
+           ""quoteTaxCategory"": ""NA"",
+           ""serviceInstanceId"": ""0123456789"",
+           ""throttledProfile"": ""1007"",
+         },
+         ""parameterArray"": [
+           {
+             ""mtx_container_name"": ""MtxParameterData"",
+             ""parameterName"": ""c1UnitPrice"",
+             ""value"": {
+               ""mtx_container_name"": ""MtxParameterDecimalValue"",
+               ""value"": 10
+             }
+           }
+         ]
+       }
+     ]
+   }
+3. Query the subscription and check the TefActiveEndDate.
+4. Verify that there is a MtxPurchaseEvent.
+5. Verify that there is a MtxRecurringEvent.
+6. Verify that there is a MtxSubscriptionModifyEvent and check the details.";"1. The subscription was queried successful.
+   The output was saved for later comparison.
+   The subscriber fulfills the pre-conditions.
+   The tefActiveEndDateTime is noted.
+2. The request was send successfully.
+3. The subscription was queried successful.
+   The tefActiveEndDateTime is exactly 6 months after the purchase.
+   The nextStatusTransitionTimeEstimate is the same as the tefActiveEndDateTime.
+4. There is a MtxPurchaseEvent.
+5. There is a MtxRecurringEvent.
+6. There is a MtxSubscriptionModifyEvent and all fields are consistent.
+   The associatedEventId refers to the MtxPurchaseEvent.
+   The subscriptionInfoModified list the correct tefActiveEndDateTime.";
+TMSII01228922;TEF-165_008 - NettoKom - External Payment - Recurring (above);"TEF-165: Subscription Expiry Rules based on Payment Method
+
+The purpose of this test is to verify the correct update of the subscription expiry date by an offer renewal based on the payment method and the offer price.";"1. CCS is fully integrated.
+2. CCS at Release 5251 or higher.
+3. CCS  is up and running.
+4. RS Gateway up and running
+5. RESTful test client (e.g. SoapUI) is available and able to communicate with CCS.
+6. Access to NMC-Tools for checking Events.
+7. Access to Anritsu for fetching pcap traces.
+8. Access to latest version of ""U-640 Converged Charging System (CCS) – Swagger Spec"" and its subpages. Either directly in confluence or as export.
+9. Access to latest version of ""U-640 Converged Charging System (CCS) – Event Interface Specification"".
+10. A working NettoKom customer account with sufficient balance and an active NettoKom Smart Option payed by external payment and an offer price above 1.99. (see TEF-165_007)";"1. Send a RESTful API Call to change the expiration date of the subscription.
+   Set the tefActiveEndDateTime to a few days in the future.
+   Method:    PUT
+   Ressource: /rsgateway/data/openapi/subscription/{SearchTerm}
+   Body:
+   {
+     ""apiEventData"": {
+       ""mtx_container_name"": ""TefApiEventDataExtension"",
+       ""clientName"": ""TestClient_{{Tester}}""
+     },
+     ""executeMode"": ""normal"",
+     ""mtx_container_name"": ""MtxRequestSubscriptionModify"",
+     ""attr"": {
+       ""mtx_container_name"": ""TefSubscriptionExtension"",
+       ""tefActiveEndDateTime"": ""yyyy-mm-ddThh:mm:00.000000+0200""
+     }
+   }
+2. Query the subscription and check the main balance and the TefActiveEndDate.
+   Method:    GET
+   Ressource: /rsgateway/data/openapi/subscription/{SearchTerm}
+   Body:      empty
+3. Wait for the MtxExternalPaymentRequestEvent, which will be generated 15 minutes before the end of the current cycle.
+   To speed up things, you might change the cycleEndTime manually.
+   Please ensure to use the correct resourceId of the related bundle.
+   Please choose an appropriate cycleEndTime. (eg 18 minutes in the future)
+   Method:    PUT:
+   Ressource: /rsgateway/data/openapi/subscription/{SearchTerm}/offers/{resourceId}
+   Body:
+   {
+     ""apiEventData"": {
+       ""mtx_container_name"": ""TefApiEventDataExtension"",
+       ""clientName"": ""TestClient_{{Tester}}""
+     },
+     ""attr"": {
+       ""mtx_container_name"": ""TefPurchasedItemExtension""
+     },
+     ""cycleData"": {
+       ""cycleEndTime"": ""2023-01-01T12:00:00.000000+01:00"",
+       ""immediateChange"": true,
+       ""mtx_container_name"": ""MtxPurchasedItemCycleData""
+     },
+     ""mtx_container_name"": ""MtxRequestSubscriberModifyOffer""
+   }
+4. Check the external payment record of the subscription.
+   Note the amount and resourceId.
+   Method:    GET
+   Ressource: /rsgateway/data/openapi/subscription/{SearchTerm}/external_payment
+   Body:      empty
+5. Send a RESTful API Call to update the external payment record of the subscription.
+   Use the amount and resourceId noted in step 4.
+   Method:    PUT
+   Ressource: /rsgateway/data/openapi/subscription/{SearchTerm}/external_payment/{ResourceId}
+   Body:
+   {
+     ""amount"": 7.99,
+     ""apiEventData"": {
+       ""mtx_container_name"": ""TefApiEventDataExtension"",
+       ""clientName"": ""NQ10015121""
+     },
+     ""info"": ""TEF-165_004 - NettoKom - External Payment - Recurring"",
+     ""mtx_container_name"": ""MtxRequestSubscriberModifyExternalPayment"",
+     ""opType"": ""payment"",
+     ""reason"": ""TEF-165_004 - NettoKom - External Payment - Recurring""
+   }
+6. Check the external payment record of the subscription. (see step 4)
+7. Wait for the next cycle.
+   To speed up things, you might change the cycleEndTime once again.
+8. Query the subscription and check the cycleInfo of the purchased pack and the TefActiveEndDate.
+9. Check the external payment record of the subscription. (see step 4)
+10. Verify that there is a MtxExternalPaymentEvent.
+11. Verify that there is a MtxRecurringEvent.
+12. Verify that there is a MtxRecurringChargeNotification (MtxNotificationDoneEvent with notificationType subscriber_recurring_charge).
+13. Verify that there is a MtxSubscriptionModifyEvent and check the details.";"1. The request was send successfully.
+2. The subscription was queried successful.
+   The output was saved for later comparison.
+   The subscriber fulfills the pre-conditions.
+   The tefActiveEndDateTime is a few days in the future.
+   The nextStatusTransitionTimeEstimate is the same as the tefActiveEndDateTime.
+3. The MtxExternalPaymentRequestEvent is available. All fields are consistent.
+4. All information in the externalPaymentRequestInfoList are correct.
+   The paymentStatus is due.
+   The amount and resourceId are noted.
+5. The request was send successfully.
+6. All information in the externalPaymentRequestInfoList are correct.
+   The paymentStatus is pending.
+7. The offer was renewed.
+8. The subscription was queried successful.
+   The cycleEndTime is 4 weeks in the future.
+   The tefActiveEndDateTime is 12 months in the future.
+   The nextStatusTransitionTimeEstimate is the same as the tefActiveEndDateTime.
+9. All information in the externalPaymentRequestInfoList are correct.
+   The paymentStatus is paid.
+10. There is a MtxExternalPaymentEvent.
+11. There is a MtxRecurringEvent.
+12. There is a MtxRecurringChargeNotification.
+13. There is a MtxSubscriptionModifyEvent and all fields are consistent.
+    The subscriptionInfoModified list the correct tefActiveEndDateTime.";

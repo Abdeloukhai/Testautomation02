@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.2 (Python 3.14.5 on win32)" generated="2026-06-25T11:05:49.211351" rpa="false" schemaversion="5">
+<suite id="s1" name="Call Test" source="C:\Users\saleh\Testautomation\robot\call_test.robot">
+<test id="s1-t1" name="Setup And Verify Environment" line="50">
+<kw name="Verify ADB Is Available">
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-25T11:05:49.962467" level="INFO">Starting process:
+adb --version</msg>
+<msg time="2026-06-25T11:05:49.979984" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-25T11:05:50.113477" level="INFO">Process completed.</msg>
+<msg time="2026-06-25T11:05:50.114340" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>--version</arg>
+<arg>stdout=${OUTPUT_DIR}/adb_version.txt</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-25T11:05:49.959929" elapsed="0.155030"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-25T11:05:50.119088" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-25T11:05:50.116960" elapsed="0.002370"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-06-25T11:05:50.120126" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\saleh\Testautomation\robot\adb_version.txt"&gt;C:\Users\saleh\Testautomation\robot\adb_version.txt&lt;/a&gt;'.</msg>
+<msg time="2026-06-25T11:05:50.125961" level="INFO">${output} = Android Debug Bridge version 1.0.41
+Version 37.0.0-14910828
+Installed as C:\Users\saleh\Testautomation\robot\adb.exe
+Running on Windows 10.0.22631
+</msg>
+<var>${output}</var>
+<arg>${OUTPUT_DIR}/adb_version.txt</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-06-25T11:05:50.119700" elapsed="0.006714"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${output}</arg>
+<arg>Android Debug Bridge</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2026-06-25T11:05:50.127353" elapsed="0.002677"/>
+</kw>
+<status status="PASS" start="2026-06-25T11:05:49.952673" elapsed="0.177943"/>
+</kw>
+<kw name="Verify Device Is Connected">
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-25T11:05:50.136175" level="INFO">Starting process:
+adb devices</msg>
+<msg time="2026-06-25T11:05:50.152544" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-25T11:05:50.302400" level="INFO">Process completed.</msg>
+<msg time="2026-06-25T11:05:50.302729" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>devices</arg>
+<arg>stdout=${OUTPUT_DIR}/devices.txt</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-25T11:05:50.133274" elapsed="0.169537"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-25T11:05:50.306009" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-25T11:05:50.303121" elapsed="0.003115"/>
+</kw>
+<kw name="Get File" owner="OperatingSystem">
+<msg time="2026-06-25T11:05:50.307125" level="INFO" html="true">Getting file '&lt;a href="file://C:\Users\saleh\Testautomation\robot\devices.txt"&gt;C:\Users\saleh\Testautomation\robot\devices.txt&lt;/a&gt;'.</msg>
+<msg time="2026-06-25T11:05:50.310433" level="INFO">${output} = List of devices attached
+RFCN80A7HYJ	device
+
+</msg>
+<var>${output}</var>
+<arg>${OUTPUT_DIR}/devices.txt</arg>
+<doc>Returns the contents of a specified file.</doc>
+<status status="PASS" start="2026-06-25T11:05:50.306619" elapsed="0.003901"/>
+</kw>
+<kw name="Should Match Regexp" owner="BuiltIn">
+<arg>${output}</arg>
+<arg>(?m)^\\S+\\s+device$</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="PASS" start="2026-06-25T11:05:50.310805" elapsed="0.001034"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-25T11:05:50.313176" level="INFO">Device connected successfully</msg>
+<arg>Device connected successfully</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-25T11:05:50.312433" elapsed="0.000872"/>
+</kw>
+<status status="PASS" start="2026-06-25T11:05:50.131194" elapsed="0.182280"/>
+</kw>
+<doc>Verify ADB is installed and a device is connected.</doc>
+<status status="PASS" start="2026-06-25T11:05:49.949727" elapsed="0.364055"/>
+</test>
+<test id="s1-t2" name="Make Mobile Call" line="55">
+<kw name="Dial Phone Number">
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-25T11:05:50.318311" level="INFO">Dialing 555 ...</msg>
+<arg>Dialing ${number} ...</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-25T11:05:50.317366" elapsed="0.001093"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-25T11:05:50.320219" level="INFO">Starting process:
+adb shell am start -a android.intent.action.CALL -d tel:555</msg>
+<msg time="2026-06-25T11:05:50.334963" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-25T11:05:50.698208" level="INFO">Process completed.</msg>
+<msg time="2026-06-25T11:05:50.698547" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>am</arg>
+<arg>start</arg>
+<arg>-a</arg>
+<arg>android.intent.action.CALL</arg>
+<arg>-d</arg>
+<arg>tel:${number}</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-25T11:05:50.318792" elapsed="0.379851"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-25T11:05:50.700920" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-25T11:05:50.699061" elapsed="0.002042"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-25T11:05:50.702414" level="INFO">Dial command executed successfully</msg>
+<arg>Dial command executed successfully</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-25T11:05:50.701457" elapsed="0.001124"/>
+</kw>
+<arg>${PHONE_NUMBER}</arg>
+<status status="PASS" start="2026-06-25T11:05:50.316597" elapsed="0.386195"/>
+</kw>
+<kw name="Wait And End Call">
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2026-06-25T11:05:55.708895" level="INFO">Slept 5 seconds.</msg>
+<arg>5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2026-06-25T11:05:50.706250" elapsed="5.002860"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-06-25T11:05:55.711920" level="INFO">Starting process:
+adb shell input keyevent 6</msg>
+<msg time="2026-06-25T11:05:55.751023" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-06-25T11:05:56.268159" level="INFO">Process completed.</msg>
+<msg time="2026-06-25T11:05:56.268493" level="INFO">${result} = &lt;result object with rc 0&gt;</msg>
+<var>${result}</var>
+<arg>adb</arg>
+<arg>shell</arg>
+<arg>input</arg>
+<arg>keyevent</arg>
+<arg>6</arg>
+<arg>timeout=${ADB_TIMEOUT}s</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-06-25T11:05:55.709524" elapsed="0.559058"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-06-25T11:05:56.273947" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${result.rc}</arg>
+<arg>0</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-06-25T11:05:56.268954" elapsed="0.005187"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-06-25T11:05:56.277678" level="INFO">Call ended</msg>
+<arg>Call ended</arg>
+<arg>level=INFO</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-06-25T11:05:56.275134" elapsed="0.002828"/>
+</kw>
+<status status="PASS" start="2026-06-25T11:05:50.703339" elapsed="5.574985"/>
+</kw>
+<doc>Dial the configured phone number and then end the call.
+Override PHONE_NUMBER via environment variable, e.g.:
+PHONE_NUMBER=+15551234567 robot call_test.robot</doc>
+<tag>call</tag>
+<tag>mobile</tag>
+<status status="PASS" start="2026-06-25T11:05:50.314495" elapsed="5.964165"/>
+</test>
+<doc>Simple Robot Framework test to make a phone call via ADB.
+Connect an Android device via USB and enable USB debugging first.</doc>
+<status status="PASS" start="2026-06-25T11:05:49.217323" elapsed="7.062836"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">call</stat>
+<stat pass="1" fail="0" skip="0">mobile</stat>
+</tag>
+<suite>
+<stat name="Call Test" id="s1" pass="2" fail="0" skip="0">Call Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
